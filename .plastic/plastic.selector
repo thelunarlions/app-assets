@@ -1,0 +1,4 @@
+repository "sharing project@tonyforself@cloud"
+  path "/"
+    br "/main"
+    co "/main"
