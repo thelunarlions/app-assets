@@ -3,23 +3,25 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 
-public class CameraScript : MonoBehaviour
+public class StatScript : MonoBehaviour
 {
     public Transform target;
 
     public string fileName = "data.json"; // Name of the file in the Resources folder
-    public float speed = 1.0f;           // Speed of the rocket movement
     private List<DataPoint> dataPoints;
     private int currentIndex = 0;
-
+    [SerializeField]
+    private TMP_Text _title;
 
     void Start()
     {
-        CLoadData();
-        transform.position = new Vector3(3691, 4217, 3036);
+        SLoadData();
     }
+
 
     void Update()
     {
@@ -28,11 +30,9 @@ public class CameraScript : MonoBehaviour
         {
             // Get the target position from the current data point
             DataPoint currentData = dataPoints[currentIndex];
-            Vector3 targetPosition = new Vector3((float)currentData.Rx + 1, (float)currentData.Ry - 3, (float)currentData.Rz + 6);
 
-            // Instantly move the rocket to the target position
-            // Move to the target position
-            transform.position = targetPosition;
+
+            _title.text = $"Mission Time: {currentData.Time}\nRocket X: {currentData.Rx}\nRocket Y: {currentData.Ry}\nRocket Z: {currentData.Rz}";  // Change the text
 
 
 
@@ -45,7 +45,7 @@ public class CameraScript : MonoBehaviour
 
 
 
-    void CLoadData()
+    void SLoadData()
     {
         try
         {
